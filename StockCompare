@@ -1,0 +1,78 @@
+#-------------------------------------------------------------------------------
+# Name:        module1
+# Purpose:
+#
+# Author:      schilka
+#
+# Created:     17/12/2020
+# Copyright:   (c) schilka 2020
+# Licence:     <your licence>
+#-------------------------------------------------------------------------------
+
+intc_param = {
+        "revenue"           : 71.97,
+        "net_income"        : 21.05,
+        "diluted_eps"       : 4.71,
+        "net_profit_margin" : 29.25,
+        "operating_income"  : 22.43,
+        "net_change_in_cash": 1.18,
+        "cash_on_hand"      : 4.19,
+        "cost_of_revenue"   : 29.83
+        }
+
+aapl_param = {
+        "revenue"           : 274.52,
+        "net_income"        : 57.41,
+        "diluted_eps"       : 3.28,
+        "net_profit_margin" : 20.91,
+        "operating_income"  : 66.29,
+        "net_change_in_cash": -10.44,
+        "cash_on_hand"      : 38.03,
+        "cost_of_revenue"   : 169.56
+        }
+
+class stock:
+
+    def __init__(self, ticker, period, num_employees, param):
+        self.ticker = ticker
+        self.period = period
+        self.num_employees = num_employees
+        self.param  = param
+
+    def get_ticker(self):
+        return self.ticker
+
+    def get_period(self):
+        return self.period
+
+    def get_employees(self):
+        return self.num_employees
+
+    def get_param(self):
+        return self.param
+
+def compare(vector, a, b):
+
+    if(vector == "employee_vs_revenue"):
+        a_ticker  = a.get_ticker()
+        b_ticker  = b.get_ticker()
+        a_revenue = a.get_param()["revenue"]
+        b_revenue = b.get_param()["revenue"]
+        a_employees = a.get_employees()
+        b_employees = b.get_employees()
+        a_revenue_per_employee = "{:.3f}".format((a_revenue*1000)/a_employees)
+        b_revenue_per_employee = "{:.3f}".format((b_revenue*1000)/b_employees)
+        return "Compare Revenue per Employee: {}:{} Mil Vs {}:{} Mil".format(a_ticker, a_revenue_per_employee, b_ticker, b_revenue_per_employee)
+    pass
+
+def main():
+    intc = stock("INTC", "Annual", 110800, intc_param)
+    aapl = stock("AAPL", "Annual", 147000, aapl_param)
+    print(intc.get_ticker())
+    print(aapl.get_ticker())
+    #print (intc.get_param()["revenue"])
+    print(compare("employee_vs_revenue", intc, aapl))
+    pass
+
+if __name__ == '__main__':
+    main()
